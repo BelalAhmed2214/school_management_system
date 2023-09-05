@@ -32,12 +32,21 @@
                             </span>
                                 @enderror
                             </div>
+                            <div class="form-group">
+                                <label for="role">Select Your Role:</label>
+                                <select class="form-control  bg-light text-dark" id="role" name="role">
+                                    <option value="Admin">Admin</option>
+                                    <option value="Teacher">Teacher</option>
+                                    <option value="Student">Student</option>
+                                </select>
+                            </div>
+                            <br>
 
                             <div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <label class="form-check-label" for="remember">{{ __('Remember Me') }}</label>
                             </div>
-                            <br>
+
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">{{ __('Login') }}</button>
                                 @if (Route::has('password.request'))

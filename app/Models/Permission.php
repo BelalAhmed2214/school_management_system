@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Permission extends Model
 {
     use HasFactory;
-    const ADMIN = 1;
-    const TEACHER = 2;
-    const STUDENT = 3;
+
+    Const CREATE = 1;
+    Const READ = 2;
+    Const UPDATE = 3;
+    Const DELETE = 4;
+
 }
