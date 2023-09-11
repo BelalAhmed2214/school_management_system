@@ -41,8 +41,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function hasRole($role)
+
+    public function role()
     {
-        return $this->roles->contains('name', $role);
+        return $this->belongsTo(Role::class);
     }
+
 }
