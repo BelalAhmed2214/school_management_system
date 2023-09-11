@@ -9,16 +9,17 @@ use App\Policies\UserPolicy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-
 class UserController extends Controller
 {
-    public function index()
+
+
+    public function profile()
     {
         $user = User::where('id',Auth::user()->id)->first();
         $roleFolder = $this->getRoleFolder($user->role_id);
         return view('profile.index',compact('user'));
     }
-    function getRoleFolder($roleId)
+    public function getRoleFolder($roleId)
     {
         if ($roleId == 1) {
             return 'Admin';
@@ -28,8 +29,28 @@ class UserController extends Controller
             return 'Student';
         }
     }
-    public function updateProfile()
+    public function editProfile()
     {
-        //TODO:Implement UpdateProfileMethod
+        $user = Auth::user();
+        return view('profile.edit',compact('user'));
     }
+    public function updateProfile(Request $request, User $user)
+    {
+        // Validate the form data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'string|email|max:255|unique:users,email,' . $user->id,
+        ]);
+
+        // Update the user's name and email
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+
+        // Save the changes
+        $user->save();
+
+        return redirect()->route('profile.index')->with('success', 'Profile Successfully Updated');
+    }
+
+
 }

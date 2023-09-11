@@ -30,7 +30,7 @@
 <div id="layout-wrapper">
 	@include("layouts.header")
 
-	@include("layouts.sidebar")
+    @include("layouts.sidebar")
 
 	<div class="main-content">
 

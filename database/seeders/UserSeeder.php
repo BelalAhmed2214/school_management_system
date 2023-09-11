@@ -20,8 +20,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'email' => 'belal@gmail.com',
             'password' => Hash::make('123456789'),
-            'first_name' => 'Belal',
-            'last_name' => 'Ahmed',
+            'name' => 'Belal Ahmed',
             'role_id'=>Role::ADMIN,
             'created_at' => now(),
             'updated_at' => now(),
@@ -29,8 +28,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'email' => 'mostafa@gmail.com',
             'password' => Hash::make('123456789'),
-            'first_name' => 'mostafa',
-            'last_name' => 'kamel',
+            'name' => 'Mostafa Kamel',
             'role_id'=>Role::TEACHER,
             'created_at' => now(),
             'updated_at' => now(),
@@ -38,8 +36,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'email' => 'ali@gmail.com',
             'password' => Hash::make('123456789'),
-            'first_name' => 'ali',
-            'last_name' => 'hamdy',
+            'name' => 'Ali Hamdy',
             'role_id'=>Role::STUDENT,
             'created_at' => now(),
             'updated_at' => now(),

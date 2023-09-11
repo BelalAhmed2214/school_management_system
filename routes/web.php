@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,8 +46,19 @@ Route::get('password/reset/{token}', [ResetPasswordController::class,'showResetF
 Route::post('password/reset', [ResetPasswordController::class,'reset'])->name('password.update');
 
 ###### End Password Reset ##############################
-############ Start Admin ###############################
-Route::get('/Profile', [UserController::class,'index'])->name('profile.index');
-Route::post('/Profile/update', [UserController::class,'updateProfile'])->name('profile.update');
-############ End Admin ################################
+############ Start profile ###############################
+Route::get('/Profile', [UserController::class,'profile'])->name('profile.index');
+Route::get('/Profile/edit', [UserController::class,'editProfile'])->name('profile.edit');
+Route::post('/Profile/{user}', [UserController::class,'updateProfile'])->name('profile.update');
+############ End profile ################################
+############### Start Admin ##############################
+Route::get('teachers',[AdminController::class,'index'])->name('teachers.index');
+############### End Admin ##############################
+
+
+
+
+
+
+
 
