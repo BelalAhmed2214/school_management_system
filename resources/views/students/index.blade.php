@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Teachers')
+@section('title', 'students')
 
 @section('content')
     <div class="container">
@@ -9,7 +9,7 @@
 
                 <div class="card">
 
-                    <div class="card-header">{{ __('Teachers') }}</div>
+                    <div class="card-header">{{ __('Students') }}</div>
 
                     <div class="card-body">
 
@@ -25,28 +25,30 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Role</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
                                 <?php $i=0 ?>
-                                @foreach ($teachers as $teacher)
+                                @foreach ($students as $student)
                                         <?php $i++ ?>
                                     <tr>
                                         <td>{{ $i }}</td>
-                                        <td>{{ $teacher->name }}</td>
-                                        <td>{{ $teacher->email }}</td>
+                                        <td>{{ $student->name }}</td>
+                                        <td>{{ $student->email }}</td>
+                                        <td>{{$student->role->name}}</td>
                                         <td>
                                             <!-- Add action buttons or links here -->
                                             <a href="#" class="btn btn-info btn-sm">View</a>
                                             <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{$teacher->id}}">Delete</button>
+                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{$student->id}}">Delete</button>
                                         </td>
                                     </tr>
 
                                     <!-- Delete Modal -->
-                                    <div class="modal fade" id="deleteModal{{$teacher->id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="deleteModal{{$student->id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">

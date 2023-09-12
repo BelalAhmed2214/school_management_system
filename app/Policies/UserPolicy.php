@@ -14,13 +14,13 @@ class UserPolicy
     {
         return $user->role->name === 'Admin';
     }
-    public function view_teacher(User $user)
-    {
-        return $user->role->name === 'Admin';
-    }
-    public function add_student(User $user)
-    {
-        return $user->role->name === 'Admin';
-    }
+//    public function view_teacher(User $user)
+//    {
+//        return $user->role->name === 'Admin';
+//    }
+//    public function add_student(User $user)
+//    {
+//        return $user->role->name === 'Admin';
+//    }
 
 }

@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\Course\CourseController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Student\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,12 +54,22 @@ Route::get('/Profile/edit', [UserController::class,'editProfile'])->name('profil
 Route::post('/Profile/{user}', [UserController::class,'updateProfile'])->name('profile.update');
 ############ End profile ################################
 ############### Start Admin ##############################
-Route::get('teachers',[AdminController::class,'index'])->name('teachers.index');
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::get('teachers', [AdminController::class, 'teachers'])->name('teachers.index');
+    Route::get('courses', [CourseController::class,'index'])->name('admin.courses.index');
+    Route::post('courses',[CourseController::class,'store'])->name('admin.courses.store');
+    Route::get('courses/create',[CourseController::class,'create'])->name('admin.courses.create');
+    Route::get('students', [AdminController::class, 'students'])->name('admin.students.index');
+
+});
 ############### End Admin ##############################
 
-
-
-
+############## Start Student ###########################
+Route::group(['prefix' => 'student', 'namespace' => 'Student'], function () {
+    Route::get('courses/choose', [StudentController::class,'chooseCourse'])->name('student.courses.choose');
+    //TODO: implement Store Route to Make Student Enroll in a course
+});
+############## End Student #############################
 
 
 

@@ -17,10 +17,27 @@
                         <li>
                             <a href="{{route('teachers.index')}}" class="waves-effect">
                                 <i class="mdi mdi-account-group"></i>
-                                <span>teachers</span>
+                                <span>Teachers</span>
                             </a>
                         </li>
                     @endif
+
+                    <li>
+                        <a href="{{route('admin.students.index')}}" class="waves-effect">
+                            <i class="mdi mdi-account-group"></i>
+                            <span>Students</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{route('admin.courses.index')}}" class="waves-effect">
+                            <i class="mdi mdi-account-group"></i>
+                            <span>Courses</span>
+                        </a>
+                    </li>
+
+
+
 
                 @endif
             </ul>
