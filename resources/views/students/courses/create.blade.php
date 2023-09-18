@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Choose Your Course')
+@section('title', 'Register Your Courses')
 
 @section('content')
     <div class="container">
         <div class="card-header">
-            <h4>Enroll in a Course</h4>
+            <h4>Register a Course</h4>
         </div>
         <br>
         @if (session('success'))
@@ -14,12 +14,12 @@
             </div>
         @endif
 
-        <form method="POST" action="#">
+        <form method="POST" action="{{route('student.courses.store')}}">
             @csrf
 
             <div class="form-group">
                 <label for="course">Select a Course:</label>
-                <select id="course" name="course_id" class="form-control" required>
+                <select id="course" name="course" class="form-control" required>
                     <option value="">Select a Course</option>
                     @foreach ($courses as $course)
                         <option value="{{ $course->id }}">{{ $course->name }}</option>
@@ -40,4 +40,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
+
 @endsection
+
+

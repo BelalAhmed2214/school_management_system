@@ -5,8 +5,11 @@
 @section('content')
 
     @if (session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     @endif
     <div class="container">
@@ -19,9 +22,6 @@
                     <th>ID</th>
                     <th>Course</th>
                     <th>Instructor</th>
-                    @if (Auth::user()->role->name === 'Admin')
-                        <th>Students</th> <!-- Only show for Admin -->
-                    @endif
                     <th>Created At</th>
                     <th>Actions</th>
                 </tr>
@@ -35,31 +35,21 @@
                     <tr>
                         <td>{{ $i }}</td>
                         <td>{{ $course->name }}</td>
+
                         <td>
-                            @foreach ($course->users as $user)
-                                {{ $user->name }}
-                                @if (!$loop->last)
-                                    <br> <!-- Add a line break if it's not the last instructor -->
+                            @foreach($course->users as $user)
+                                @if ($user->role->name === 'Teacher')
+                                    {{ $user->name }}
                                 @endif
                             @endforeach
                         </td>
-                        @if (Auth::user()->role->name === 'Admin')
-                            <td>
-                                @foreach ($course->users as $user)
-                                    {{ $user->name }}
-                                    @if (!$loop->last)
-                                        <br> <!-- Add a line break if it's not the last student -->
-                                    @endif
-                                @endforeach
-                            </td>
-                        @endif
 
                         <td>{{ $course->created_at }}</td>
                         <td>
                             <!-- Add your actions here, like view, edit, delete buttons -->
-                            <a href="{{ route('courses.show', $course->id) }}" class="btn btn-info">View</a>
-                            <a href="{{ route('courses.edit', $course->id) }}" class="btn btn-primary">Edit</a>
-                            <form action="{{ route('courses.destroy', $course->id) }}" method="POST" style="display: inline;">
+                            <a href="#" class="btn btn-info">View</a>
+                            <a href="#" class="btn btn-primary">Edit</a>
+                            <form action="#" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>

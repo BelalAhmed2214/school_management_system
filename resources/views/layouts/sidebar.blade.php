@@ -13,33 +13,47 @@
                         </a>
                     </li>
                     <!-- Check the authorization using a condition -->
-                    @if(Auth::user()->role_id==1)
-                        <li>
-                            <a href="{{route('teachers.index')}}" class="waves-effect">
+                    @can('viewTeacher',App\Models\User::class)
+                            <li>
+                            <a href="{{route('admin.teachers.index')}}" class="waves-effect">
                                 <i class="mdi mdi-account-group"></i>
                                 <span>Teachers</span>
                             </a>
                         </li>
-                    @endif
+                    @endcan
 
+                    @can('viewStudent',App\Models\User::class)
                     <li>
                         <a href="{{route('admin.students.index')}}" class="waves-effect">
                             <i class="mdi mdi-account-group"></i>
                             <span>Students</span>
                         </a>
                     </li>
+                    @endcan
 
+                    @can('viewCourses',App\Models\User::class)
                     <li>
                         <a href="{{route('admin.courses.index')}}" class="waves-effect">
                             <i class="mdi mdi-account-group"></i>
                             <span>Courses</span>
                         </a>
                     </li>
+                    @endcan
+                    @can('registerCourse',App\Models\User::class)
 
-
+                    <li>
+                        <a href="{{route('student.courses.create')}}" class="waves-effect">
+                            <i class="mdi mdi-account-group"></i>
+                            <span>Courses</span>
+                        </a>
+                    </li>
+                    @endcan
 
 
                 @endif
+
+
+
             </ul>
         </div>
         <!-- Sidebar -->

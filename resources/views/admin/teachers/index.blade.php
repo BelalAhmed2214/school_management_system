@@ -8,14 +8,20 @@
             <div class="col-md-12">
 
                 <div class="card">
-
+                    <div>
+                        <a href="{{route('admin.teachers.create')}}" class="btn btn-success">Add Teacher</a>
+                    </div>
+                    <br>
                     <div class="card-header">{{ __('Teachers') }}</div>
 
                     <div class="card-body">
 
                         @if (session('success'))
-                            <div class="alert alert-success">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('success') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
                         @endif
 
@@ -40,7 +46,7 @@
                                         <td>
                                             <!-- Add action buttons or links here -->
                                             <a href="#" class="btn btn-info btn-sm">View</a>
-                                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="{{route('admin.teachers.edit',$teacher->id)}}" class="btn btn-primary btn-sm">Edit</a>
                                             <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{$teacher->id}}">Delete</button>
                                         </td>
                                     </tr>
@@ -60,7 +66,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <form action="#" method="POST">
+                                                    <form action="{{ route('admin.teachers.destroy', $teacher->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Delete</button>
