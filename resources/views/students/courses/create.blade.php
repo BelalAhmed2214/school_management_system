@@ -18,7 +18,7 @@
             @csrf
 
             <div class="form-group">
-                <label for="course">Select a Course:</label>
+                <label for="course">Select a Course</label>
                 <select id="course" name="course" class="form-control" required>
                     <option value="">Select a Course</option>
                     @foreach ($courses as $course)
@@ -28,7 +28,7 @@
             </div>
 
             <div class="form-group">
-                <label for="instructor">Select an Instructor:</label>
+                <label for="instructor">Select an Instructor</label>
                 <select id="user_id" name="user_id" class="form-control" required>
                     <option value="">Select an Instructor</option>
                     @foreach ($instructors as $instructor)

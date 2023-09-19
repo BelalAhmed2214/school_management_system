@@ -9,7 +9,7 @@
         </div>
         <br>
 
-        <form method="POST" action="{{route('admin.teachers.update',$teacher)}}">
+        <form method="POST" action="{{route('admin.teacher.update',$teacher)}}">
             @csrf
             @method('PUT') <!-- Use the PUT method for updating -->
 

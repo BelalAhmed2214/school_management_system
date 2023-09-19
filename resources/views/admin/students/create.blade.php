@@ -9,7 +9,7 @@
         </div>
         <br>
 
-        <form method="POST" action="{{route('admin.students.store')}}">
+        <form method="POST" action="{{route('admin.student.store')}}">
             @csrf
 
             <div class="form-group">

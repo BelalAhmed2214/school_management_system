@@ -8,13 +8,15 @@ use App\Models\Course;
 use App\Models\User;
 use App\Models\Video;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class CourseController extends Controller
 {
 
     public function index()
     {
-        $courses = Course::with('users')->get(); // Get the currently authenticated user
+        $this->authorize('viewEnrolledCourses',User::class);
+        $student = Auth::user();
+        $courses=$student->courses;
         $instructors = User::where('role_id',2)->first();
 
         return view('students.courses.index', compact('courses','instructors'));
@@ -35,24 +37,19 @@ class CourseController extends Controller
 
         // Check if the user is already enrolled in this course
         if ($user->courses()->where('courses.id', $courseId)->exists()){
-            return redirect()->route('student.courses.index')->with('error', 'You are already enrolled in this course.');
+            return redirect()->route('student.courses.index')->with('error', 'You are already enrolled in this course');
         }
 
-        // Attach the selected instructor to the course (if not already attached)
         $course = Course::find($courseId);
-        if (!$course) {
-            return redirect()->route('student.courses.index')->with('error', 'Selected course not found.');
-        }
-
         // Check if the instructor is related to this course
         if (!$course->users()->where('users.id', $instructorId)->exists()) {
-            return redirect()->route('student.courses.index')->with('error', 'Selected instructor is not related to this course.');
+            return redirect()->route('student.courses.index')->with('error', 'Selected instructor is not related to this course');
         }
 
         // Enroll the user in the selected course
         $user->courses()->attach($courseId);
 
-        return redirect()->route('student.courses.index')->with('success', 'Course successfully enrolled.');
+        return redirect()->route('student.courses.index')->with('success', 'Course successfully Registered');
     }
 
 

@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teacher\Video;
 
-use App\Models\Video;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreVideoRequest;
 use App\Http\Requests\UpdateVideoRequest;
+use App\Models\User;
+use App\Models\Video;
 
 class VideoController extends Controller
 {
@@ -13,7 +15,10 @@ class VideoController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('viewVideos',User::class);
+
+        $videos = Video::all();
+        return view('teachers.videos.index',compact('videos'));
     }
 
     /**

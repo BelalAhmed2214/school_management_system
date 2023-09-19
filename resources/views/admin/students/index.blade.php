@@ -9,21 +9,22 @@
 
                 <div class="card">
                     <div>
-                        <a href="{{route('admin.students.create')}}" class="btn btn-success">Add Student</a>
+                        <a href="{{route('admin.student.create')}}" class="btn btn-success">Add Student</a>
                     </div>
                     <br>
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                     <div class="card-header">{{ __('Students') }}</div>
 
                     <div class="card-body">
 
-                        @if (session('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                {{ session('success') }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @endif
+
 
                             <table class="table table-bordered">
                                 <thead>
@@ -46,7 +47,7 @@
                                         <td>
                                             <!-- Add action buttons or links here -->
                                             <a href="#" class="btn btn-info btn-sm">View</a>
-                                            <a href="{{route('admin.students.edit',$student)}}" class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="{{route('admin.student.edit',$student)}}" class="btn btn-primary btn-sm">Edit</a>
                                             <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{$student->id}}">Delete</button>
                                         </td>
                                     </tr>
@@ -66,7 +67,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <form action="{{ route('admin.students.destroy', $student) }}" method="POST">
+                                                    <form action="{{ route('admin.student.destroy', $student) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Delete</button>

@@ -1,19 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teacher\Exam;
 
-use App\Models\Task;
-use App\Http\Requests\StoreTaskRequest;
-use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreExamRequest;
+use App\Http\Requests\UpdateExamRequest;
+use App\Models\Exam;
+use App\Models\User;
 
-class TaskController extends Controller
+class ExamController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $this->authorize('viewExams',User::class);
+
+        $exams = Exam::all();
+        return view('teachers.exams.index',compact('exams'));
     }
 
     /**
@@ -27,7 +32,7 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTaskRequest $request)
+    public function store(StoreExamRequest $request)
     {
         //
     }
@@ -35,7 +40,7 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Task $task)
+    public function show(Exam $exam)
     {
         //
     }
@@ -43,7 +48,7 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Task $task)
+    public function edit(Exam $exam)
     {
         //
     }
@@ -51,7 +56,7 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTaskRequest $request, Task $task)
+    public function update(UpdateExamRequest $request, Exam $exam)
     {
         //
     }
@@ -59,7 +64,7 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy(Exam $exam)
     {
         //
     }

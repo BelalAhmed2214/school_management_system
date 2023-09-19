@@ -4,16 +4,20 @@
 
 @section('content')
 
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+
     <div class="container">
         <div>
-            <a href="{{ route('admin.courses.create') }}" class="btn btn-success">Add Course</a>
+            <a href="{{ route('admin.course.create') }}" class="btn btn-success">Add Course</a>
         </div>
         <br>
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         <div class="card-header">{{ __('Courses') }}</div>
 
         @if (count($courses) > 0)
@@ -50,9 +54,8 @@
                         <td>{{ $course->created_at }}</td>
                         <td>
                             <!-- Add your actions here, like view, edit, delete buttons -->
-                            <a href="#" class="btn btn-info">View</a>
-                            <a href="#" class="btn btn-primary">Edit</a>
-                            <form action="#" method="POST" style="display: inline;">
+                            <a href="{{route('admin.course.edit',$course)}}" class="btn btn-primary">Edit</a>
+                            <form action="{{route('admin.course.destroy',$course)}}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>

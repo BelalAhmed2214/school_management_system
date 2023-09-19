@@ -6,7 +6,10 @@ use App\Models\User;
 
 class UserPolicy
 {
-    public function viewTeacher(User $user)
+    ////////////// Start Admin ////////////////////////
+
+    ////////////// Start Teacher //////////////////////
+    public function viewTeachers(User $user)
     {
         return $user->role->name === 'Admin';
     }
@@ -22,7 +25,9 @@ class UserPolicy
     {
         return $user->role->name === 'Admin';
     }
-    public function viewStudent(User $user)
+    ///////////// End Teacher /////////////////
+    //////////// Start Student //////////////////////
+    public function viewStudents(User $user)
     {
         return $user->role->name === 'Admin';
     }
@@ -38,13 +43,61 @@ class UserPolicy
     {
         return $user->role->name === 'Admin';
     }
+    ///////////// End Student /////////////////
+    ///////////// Start Course /////////////////
+
     public function viewCourses(User $user)
     {
         return $user->role->name === 'Admin';
+    }
+    public function addCourse(User $user)
+    {
+        return $user->role->name === 'Admin';
+    }
+    public function editCourse(User $user)
+    {
+        return $user->role->name === 'Admin';
+    }
+    public function deleteCourse(User $user)
+    {
+        return $user->role->name === 'Admin';
+    }
+    ///////////// End Student /////////////////
+
+    ////////////// End Admin ////////////////////////
+
+
+    ///////////// Start Student ////////////////////
+
+    public function viewEnrolledCourses(User $user)
+    {
+        return $user->role->name === 'Student';
+
     }
     public function registerCourse(User $user)
     {
         return $user->role->name === 'Student';
     }
+    ///////////// End Student ////////////////////
+    //////////// Start Teacher ///////////////////
+    public function viewArticles(User $user)
+    {
+        return $user->role->name === 'Teacher';
+    }
+    public function viewVideos(User $user)
+    {
+        return $user->role->name === 'Teacher';
+    }
+    public function viewExams(User $user)
+    {
+        return $user->role->name === 'Teacher';
+    }
+    public function viewTasks(User $user)
+    {
+        return $user->role->name === 'Teacher';
+    }
+
+    /////////// End Teacher //////////////////////
+
 
 }

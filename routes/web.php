@@ -1,15 +1,19 @@
 <?php
 
 use App\Http\Controllers\Admin\Course\CourseController as AdminCourseController;
-use App\Http\Controllers\Student\Course\CourseController as StudentCourseController;
+use App\Http\Controllers\Admin\Student\StudentController;
+use App\Http\Controllers\Admin\Teacher\TeacherController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Teacher\LectureController;
+use App\Http\Controllers\Student\Course\CourseController as StudentCourseController;
+use App\Http\Controllers\Teacher\Article\ArticleController;
+use App\Http\Controllers\Teacher\Video\VideoController;
+use App\Http\Controllers\Teacher\Task\TaskController;
+use App\Http\Controllers\Teacher\Exam\ExamController;
+
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\Admin\Teacher\TeacherController;
-use App\Http\Controllers\Admin\Student\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,42 +70,32 @@ Route::group(['middleware'=>'auth','as'=>'profile.'],function (){
 });
 ############ End profile ################################
 ############### Start Admin ##############################
-Route::group(['middleware'=>'auth','prefix' => 'admin', 'namespace' => 'Admin' ,'as'=>'admin.'], function () {
-
-    Route::get('teachers', [TeacherController::class, 'index'])->name('teachers.index');
-    Route::get('teachers/create', [TeacherController::class, 'create'])->name('teachers.create');
-    Route::post('teachers', [TeacherController::class, 'store'])->name('teachers.store');
-    Route::get('teachers/edit/{teacher}', [TeacherController::class, 'edit'])->name('teachers.edit');
-    Route::put('teachers/{teacher}', [TeacherController::class, 'update'])->name('teachers.update');
-    Route::delete('teachers/{teacher}', [TeacherController::class, 'destroy'])->name('teachers.destroy');
-
-
-    Route::get('students', [StudentController::class, 'index'])->name('students.index');
-    Route::get('students/create', [StudentController::class, 'create'])->name('students.create');
-    Route::post('students', [StudentController::class, 'store'])->name('students.store');
-    Route::get('students/edit/{student}', [StudentController::class, 'edit'])->name('students.edit');
-    Route::put('students/{student}', [StudentController::class, 'update'])->name('students.update');
-    Route::delete('students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
-
-    Route::get('courses', [AdminCourseController::class,'index'])->name('courses.index');
-    Route::get('courses/create',[AdminCourseController::class,'create'])->name('courses.create');
-    Route::post('courses',[AdminCourseController::class,'store'])->name('courses.store');
-
+Route::group(['prefix' => 'admin' ,'as'=>'admin.'], function () {
+    Route::resources([
+        'teacher'=>TeacherController::class,
+        'student'=>StudentController::class,
+        'course'=>AdminCourseController::class
+    ]);
 });
 ############### End Admin ##############################
 
 ############## Start Student ###########################
-Route::group(['middleware'=>'auth','prefix' => 'student', 'namespace' => 'Student' ,'as'=>'student.'], function () {
+Route::group(['prefix' => 'student', 'namespace' => 'Student' ,'as'=>'student.'], function () {
     Route::get('courses', [StudentCourseController::class,'index'])->name('courses.index');
     Route::get('courses/register', [StudentCourseController::class,'create'])->name('courses.create');
     Route::post('courses',[StudentCourseController::class,'store'])->name('courses.store');
+
 });
 ############## End Student #############################
 ############# Start Teacher #############################
-Route::group(['middleware'=>'auth','prefix' => 'teacher', 'namespace' => 'Teacher' ,'as'=>'teacher.'], function () {
-    Route::get('lectures',[LectureController::class,'viewLectures'])->name('lectures.index');
+Route::group(['prefix' => 'teacher','as'=>'teacher.'], function () {
+    Route::resources([
+        'video'=>VideoController::class,
+        'article'=>ArticleController::class,
+        'exam'=>ExamController::class,
+        'task'=>TaskController::class,
+    ]);
 });
-
 ############# End Teacher ##############################
 });
 

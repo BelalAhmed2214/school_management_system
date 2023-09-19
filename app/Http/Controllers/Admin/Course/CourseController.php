@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
@@ -27,6 +28,9 @@ class CourseController extends Controller
      */
     public function create()
     {
+        $this->authorize('addCourse',User::class);
+
+
         $users = User::where('role_id',2)->get();
         return view('admin.courses.create',compact('users'));
     }
@@ -36,6 +40,7 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
+        $this->authorize('addCourse',User::class);
 
         // Create a new course record
         $course = new Course();
@@ -49,22 +54,25 @@ class CourseController extends Controller
         $course->users()->attach($instructorId);
 
         // Redirect the user to the course index page with a success message
-        return redirect()->route('admin.courses.index')->with('success', 'Course created successfully.');
+        return redirect()->route('admin.course.index')->with('success', 'Course created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Course $course)
+    public function show(string $id)
     {
         //
     }
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Course $course)
     {
-        //
+        $this->authorize('editCourse',User::class);
+        $users = User::where('role_id',2)->get();
+        return view('admin.courses.edit',compact('course','users'));
     }
 
     /**
@@ -72,7 +80,14 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, Course $course)
     {
-        //
+        $this->authorize('editCourse',User::class);
+
+        $course->name = $request->input('name');
+        $course->user_id = $request->input('user_id');
+        $course->save();
+
+        return redirect()->route('admin.course.index')->with('success', 'Course successfully updated');
+
     }
 
     /**
@@ -80,6 +95,9 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $this->authorize('deleteCourse',User::class);
+        $course->delete();
+        return redirect()->route('admin.course.index')->with('success', 'Course successfully deleted');
+
     }
 }
