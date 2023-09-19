@@ -53,7 +53,12 @@ class TeacherController extends Controller
      */
     public function show(string $id)
     {
-        //
+        /*
+
+         TODO:Implement Address and phoneNumber(multivalued) for Teacher and The courses
+            that the Teacher teached it.
+         */
+
     }
 
     /**

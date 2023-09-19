@@ -51,9 +51,11 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        /*
+         TODO:Implement Address and phoneNumber(multivalued) for Student and The courses
+            that the Student Enrolled in it.
+        */
     }
-
     /**
      * Show the form for editing the specified resource.
      */
