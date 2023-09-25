@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->string('duration');
+            $table->integer('duration');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('course_id');
             $table->foreign('user_id')->references('id')->on('users');

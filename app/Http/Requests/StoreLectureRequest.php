@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreVideoRequest extends FormRequest
+class StoreLectureRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,9 @@ class StoreVideoRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'video' => 'required|mimetypes:video/*|max:20480', // Max file size is 20MB
+            'content' => 'required|string',
+            'course_id' => 'required|exists:courses,id',
+            'doc' => 'required|mimes:pdf|max:5120', // Maximum size of 5MB
         ];
     }
 }

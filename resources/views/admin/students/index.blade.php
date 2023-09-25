@@ -46,37 +46,15 @@
                                         <td>{{ $student->email }}</td>
                                         <td>
                                             <!-- Add action buttons or links here -->
-                                            <a href="#" class="btn btn-info btn-sm">View</a>
-                                            <a href="{{route('admin.student.edit',$student)}}" class="btn btn-primary btn-sm">Edit</a>
-                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{$student->id}}">Delete</button>
+                                            <a href="#" class="btn btn-secondary">View</a>
+                                            <a href="{{route('admin.student.edit',$student)}}" class="btn btn-primary">Edit</a>
+                                            <form action="{{ route('admin.student.destroy', $student->id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
-
-                                    <!-- Delete Modal -->
-                                    <div class="modal fade" id="deleteModal{{$student->id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="deleteModalLabel">Delete Teacher</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Are you sure you want to delete this teacher?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <form action="{{ route('admin.student.destroy', $student) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Delete Modal -->
                                 @endforeach
                                 </tbody>
                             </table>

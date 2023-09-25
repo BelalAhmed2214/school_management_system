@@ -58,32 +58,11 @@
 
 
                     @can('viewLectures',\App\Models\User::class)
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="mdi mdi-buffer"></i>
-                            <span>Lectures</span>
-                        </a>
-                        <ul>
-                            @can('viewVideos',App\Models\User::class)
-
-                                <li>
-                                    <a href="{{route('teacher.video.index')}}" class="waves-effect">
-                                        <i class="mdi mdi-account-group"></i>
-                                        <span>Videos</span>
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('viewArticles',App\Models\User::class)
-                                <li>
-                                    <a href="{{route('teacher.article.index')}}" class="waves-effect">
-                                        <i class="mdi mdi-account-group"></i>
-                                        <span>Articles</span>
-                                    </a>
-                                </li>
-                            @endcan
-
-                        </ul>
-                    </li>
+                            <li>
+                                <a href="{{route('teacher.lecture.index')}}" class="waves-effect">
+                                    <i class="mdi mdi-account-group"></i>
+                                    <span>Lectures</span></a>
+                            </li>
                     @endcan
                     @can('viewAssignment',\App\Models\User::class)
 

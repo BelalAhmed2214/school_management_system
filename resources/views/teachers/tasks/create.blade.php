@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Add Article')
+@section('title', 'Create task')
 
 @section('content')
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h4>Add Article</h4>
+                <h4>Create task</h4>
             </div>
             <div class="card-body">
                 @if ($errors->any())
@@ -19,7 +19,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('teacher.article.store') }}">
+                <form method="POST" action="{{ route('teacher.task.store') }}">
                     @csrf
 
                     <div class="form-group">
@@ -28,8 +28,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="content">Content</label>
-                        <textarea class="form-control" id="content" name="content" rows="4" required>{{ old('content') }}</textarea>
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" required>{{ old('description') }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration">Duration (in minutes)</label>
+                        <input type="number" class="form-control" id="duration" name="duration" value="{{ old('duration') }}" required>
                     </div>
 
                     <div class="form-group">
@@ -42,7 +47,7 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Add Article</button>
+                    <button type="submit" class="btn btn-primary">Create task</button>
                 </form>
             </div>
         </div>

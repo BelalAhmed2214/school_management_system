@@ -17,9 +17,8 @@ class CourseController extends Controller
     public function index()
     {
         $this->authorize('viewCourses',User::class);
-        $courses = Course::all();
+        $courses = Course::with('users')->get();
         // Fetch all instructors (role_id = 2) and students (role_id = 3) for each course
-        $courses->load('users');
         return view('admin.courses.index',compact('courses'));
     }
 

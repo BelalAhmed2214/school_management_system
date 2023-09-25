@@ -80,14 +80,6 @@ class UserPolicy
     }
     ///////////// End Student ////////////////////
     //////////// Start Teacher ///////////////////
-    public function viewArticles(User $user)
-    {
-        return $user->role->name === 'Teacher' || $user->role->name === 'Admin';
-    }
-    public function viewVideos(User $user)
-    {
-        return $user->role->name === 'Teacher' || $user->role->name === 'Admin';
-    }
     public function viewExams(User $user)
     {
         return $user->role->name === 'Teacher' || $user->role->name === 'Admin';
@@ -96,7 +88,6 @@ class UserPolicy
     {
         return $user->role->name === 'Teacher' || $user->role->name === 'Admin';
     }
-
     public function viewLectures(User $user)
     {
         return $user->role->name === 'Teacher';

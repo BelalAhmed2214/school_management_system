@@ -1,18 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'All Articles')
+@section('title', 'Lectures')
 
 @section('content')
     <div class="container">
         <div>
-            <a href="{{route('teacher.article.create')}}" class="btn btn-success">Add Article</a>
+            <a href="{{ route('teacher.lecture.create') }}" class="btn btn-success">Add Lecture</a>
         </div>
         <br>
-        <div class="card-header">
-            <h4>All Articles</h4>
-        </div>
-        <br>
-
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -21,9 +16,14 @@
                 </button>
             </div>
         @endif
+        <div class="card-header">
+            <h4>All Lectures</h4>
+        </div>
+
+
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-10">
                 <table class="table table-bordered">
                     <thead>
                     <tr>
@@ -36,15 +36,15 @@
                     </thead>
                     <tbody>
                     <?php $i=0 ?>
-                    @foreach ($articles as $article)
+                    @foreach ($lectures as $lecture)
                             <?php $i++ ?>
                         <tr>
                             <td>{{ $i }}</td>
-                            <td>{{ $article->title }}</td>
-                            <td>{{$article->user->name}}</td>
-                            <td>{{$article->course->name}}</td>
+                            <td>{{ $lecture->title }}</td>
+                            <td>{{$lecture->user->name}}</td>
+                            <td>{{$lecture->course->name}}</td>
                             <td>
-                                    <a href="{{ route('teacher.article.show', $article) }}" class="btn btn-secondary mr-1">View</a>
+                                <a href="{{ route('teacher.lecture.show', $lecture) }}" class="btn btn-primary mr-1">View</a>
 
                             </td>
                         </tr>

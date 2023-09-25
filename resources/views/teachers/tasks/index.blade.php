@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div>
-            <a href="#" class="btn btn-success">Add Task</a>
+            <a href="{{route('teacher.task.create')}}" class="btn btn-success">Add Task</a>
         </div>
         <br>
         <div class="card-header">
@@ -29,11 +29,9 @@
                     <tr>
                         <th>#</th>
                         <th>Title</th>
-                        <th>Description</th>
                         <th>Duration</th>
                         <th>Course</th>
                         <th>Published by</th>
-                        <th>Created At</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -46,15 +44,13 @@
                         <tr>
                             <td>{{ $i }}</td>
                             <td>{{ $task->title }}</td>
-                            <td>{{ $task->description }}</td>
                             <td>{{ $task->duration }}</td>
                             <td>{{ $task->course->name }}</td>
                             <td>{{ $task->user->name }}</td>
-                            <td>{{ $task->created_at }}</td>
                             <td>
-                                <a href="{{ route('task.show', $task) }}" class="btn btn-info">View</a>
-                                <a href="{{ route('task.edit', $task) }}" class="btn btn-primary">Edit</a>
-                                <form action="{{ route('task.destroy', $task) }}" method="POST" style="display: inline;">
+                                <a href="{{ route('teacher.task.show', $task) }}" class="btn btn-info">View</a>
+                                <a href="{{ route('teacher.task.edit', $task) }}" class="btn btn-primary">Edit</a>
+                                <form action="{{ route('teacher.task.destroy', $task) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Delete</button>
