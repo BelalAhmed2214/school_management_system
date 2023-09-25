@@ -11,7 +11,7 @@ class StoreVideoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreVideoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'video' => 'required|mimetypes:video/*|max:20480', // Max file size is 20MB
         ];
     }
 }

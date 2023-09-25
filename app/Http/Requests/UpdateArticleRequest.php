@@ -11,7 +11,7 @@ class UpdateArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|max:255', // The title is required, a string, and has a maximum length of 255 characters.
+            'content' => 'required|string', // The content is required and must be a string.
+            'course_id' => 'required|exists:courses,id', // The course_id is required and must exist in the "courses" table.
         ];
     }
 }

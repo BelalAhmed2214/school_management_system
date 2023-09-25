@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
+use App\Models\Course;
 use App\Models\User;
 
 class ArticleController extends Controller
@@ -25,7 +26,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        $courses = Course::all();
+        return view('teachers.articles.create',compact('courses'));
     }
 
     /**
@@ -33,7 +35,14 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        //
+        $article = new Article();
+        $article->title = $request->input('title');
+        $article->content = $request->input('content');
+        $article->course_id = $request->input('course_id');
+        $article->user_id = auth()->id();
+        $article->save();
+
+        return redirect()->route('teacher.article.index')->with('success', 'Article added successfully.');
     }
 
     /**
@@ -41,7 +50,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('teachers.articles.show',compact('article'));
     }
 
     /**
@@ -49,7 +58,8 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        $courses = Course::all();
+        return view('teachers.articles.edit',compact('article','courses'));
     }
 
     /**
@@ -57,7 +67,13 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        //
+        $article->title = $request->input('title');
+        $article->content = $request->input('content');
+        $article->course_id = $request->input('course_id');
+        $article->user_id = auth()->id();
+        $article->save();
+        return redirect()->route('teacher.article.index')->with('success', 'Article Updated successfully.');
+
     }
 
     /**
@@ -65,6 +81,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect()->route('teacher.article.index')->with('success', 'Article Deleted successfully.');
+
     }
 }

@@ -12,6 +12,13 @@
                             <span> Profile</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="#" class="waves-effect">
+                            <i class="mdi mdi-account-group"></i>
+                            <span>Chat</span>
+                        </a>
+                    </li>
                     <!-- Check the authorization using a condition -->
                     @can('viewTeachers',App\Models\User::class)
                             <li>
@@ -48,44 +55,91 @@
                         </a>
                     </li>
                     @endcan
-                    @can('viewArticles',App\Models\User::class)
+
+
+                    @can('viewLectures',\App\Models\User::class)
                     <li>
-                        <a href="{{route('teacher.article.index')}}" class="waves-effect">
-                            <i class="mdi mdi-account-group"></i>
-                            <span>Articles</span>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="mdi mdi-buffer"></i>
+                            <span>Lectures</span>
                         </a>
+                        <ul>
+                            @can('viewVideos',App\Models\User::class)
+
+                                <li>
+                                    <a href="{{route('teacher.video.index')}}" class="waves-effect">
+                                        <i class="mdi mdi-account-group"></i>
+                                        <span>Videos</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('viewArticles',App\Models\User::class)
+                                <li>
+                                    <a href="{{route('teacher.article.index')}}" class="waves-effect">
+                                        <i class="mdi mdi-account-group"></i>
+                                        <span>Articles</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                        </ul>
                     </li>
                     @endcan
-                    @can('viewVideos',App\Models\User::class)
+                    @can('viewAssignment',\App\Models\User::class)
 
                     <li>
-                        <a href="{{route('teacher.video.index')}}" class="waves-effect">
-                            <i class="mdi mdi-account-group"></i>
-                            <span>Videos</span>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="mdi mdi-buffer"></i>
+                            <span>Assignment</span>
                         </a>
-                    </li>
-                    @endcan
-                    @can('viewExams',App\Models\User::class)
-                    <li>
-                        <a href="{{route('teacher.exam.index')}}" class="waves-effect">
-                            <i class="mdi mdi-account-group"></i>
-                            <span>Exams</span>
-                        </a>
-                    </li>
-                    @endcan
-                    @can('viewTasks',App\Models\User::class)
-                    <li>
-                        <a href="{{route('teacher.task.index')}}" class="waves-effect">
-                            <i class="mdi mdi-account-group"></i>
-                            <span>Tasks</span>
-                        </a>
+                        <ul>
+                            @can('viewExams',App\Models\User::class)
+                                <li>
+                                    <a href="{{route('teacher.exam.index')}}" class="waves-effect">
+                                        <i class="mdi mdi-account-group"></i>
+                                        <span>Exams</span>
+                                    </a>
+                                </li>
+                            @endcan
+                                @can('viewTasks',App\Models\User::class)
+                                    <li>
+                                        <a href="{{route('teacher.task.index')}}" class="waves-effect">
+                                            <i class="mdi mdi-account-group"></i>
+                                            <span>Tasks</span>
+                                        </a>
+                                    </li>
+                                @endcan
+
+                        </ul>
                     </li>
                     @endcan
 
+
+                    @can('viewResults',\App\Models\User::class)
+
+                    <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="mdi mdi-buffer"></i>
+                        <span>Results</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="#" class="waves-effect">
+                                <i class="mdi mdi-account-group"></i>
+                                <span>Exam Results</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="waves-effect">
+                                <i class="mdi mdi-account-group"></i>
+                                <span>Task Results</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                    @endcan
                 @endif
-
-
-
             </ul>
         </div>
         <!-- Sidebar -->

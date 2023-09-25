@@ -82,21 +82,33 @@ class UserPolicy
     //////////// Start Teacher ///////////////////
     public function viewArticles(User $user)
     {
-        return $user->role->name === 'Teacher';
+        return $user->role->name === 'Teacher' || $user->role->name === 'Admin';
     }
     public function viewVideos(User $user)
     {
-        return $user->role->name === 'Teacher';
+        return $user->role->name === 'Teacher' || $user->role->name === 'Admin';
     }
     public function viewExams(User $user)
     {
-        return $user->role->name === 'Teacher';
+        return $user->role->name === 'Teacher' || $user->role->name === 'Admin';
     }
     public function viewTasks(User $user)
     {
-        return $user->role->name === 'Teacher';
+        return $user->role->name === 'Teacher' || $user->role->name === 'Admin';
     }
 
+    public function viewLectures(User $user)
+    {
+        return $user->role->name === 'Teacher';
+    }
+    public function viewAssignment(User $user)
+    {
+        return $user->role->name === 'Teacher';
+    }
+    public function viewResults(User $user)
+    {
+        return $user->role->name === 'Teacher';
+    }
     /////////// End Teacher //////////////////////
 
 

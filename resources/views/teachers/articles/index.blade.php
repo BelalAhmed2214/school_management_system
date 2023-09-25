@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div>
-            <a href="#" class="btn btn-success">Add Article</a>
+            <a href="{{route('teacher.article.create')}}" class="btn btn-success">Add Article</a>
         </div>
         <br>
         <div class="card-header">
@@ -14,8 +14,11 @@
         <br>
 
         @if (session('success'))
-            <div class="alert alert-success">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         @endif
 
@@ -26,9 +29,8 @@
                     <tr>
                         <th>#</th>
                         <th>Title</th>
-                        <th>Content</th>
                         <th>Published by</th>
-                        <th>Created At</th>
+                        <th>Course</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -39,19 +41,15 @@
                         <tr>
                             <td>{{ $i }}</td>
                             <td>{{ $article->title }}</td>
-                            <td>{{ $article->content }}</td>
-                            <td>{{ $article->user->name}}</td>
-                            <td>{{ $article->created_at }}</td>
+                            <td>{{$article->user->name}}</td>
+                            <td>{{$article->course->name}}</td>
                             <td>
-                                <a href="{{ route('article.show', $article) }}" class="btn btn-info">View</a>
-                                <a href="{{ route('article.edit', $article) }}" class="btn btn-primary">Edit</a>
-                                <form action="{{ route('article.destroy', $article) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                                    <a href="{{ route('teacher.article.show', $article) }}" class="btn btn-secondary mr-1">View</a>
+
                             </td>
                         </tr>
+
+
                     @endforeach
                     </tbody>
                 </table>
