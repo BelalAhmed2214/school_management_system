@@ -103,15 +103,15 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="#" class="waves-effect">
+                            <a href="{{route('teacher.examResult.index')}}" class="waves-effect">
                                 <i class="mdi mdi-account-group"></i>
-                                <span>Exam Results</span>
+                                <span>Exams</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="waves-effect">
+                            <a href="{{route('teacher.taskResult.index')}}" class="waves-effect">
                                 <i class="mdi mdi-account-group"></i>
-                                <span>Task Results</span>
+                                <span>Tasks</span>
                             </a>
                         </li>
 

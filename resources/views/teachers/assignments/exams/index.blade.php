@@ -49,12 +49,7 @@
                             <td>{{ $exam->user->name }}</td>
                             <td>
                                 <a href="{{ route('teacher.exam.show', $exam) }}" class="btn btn-info">View</a>
-                                <a href="{{ route('teacher.exam.edit', $exam) }}" class="btn btn-primary">Edit</a>
-                                <form action="{{ route('teacher.exam.destroy', $exam) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+
                             </td>
                         </tr>
                     @endforeach

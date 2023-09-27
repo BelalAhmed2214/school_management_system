@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teacher\Result\Exam;
 
-use App\Models\ExamResult;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExamResultRequest;
 use App\Http\Requests\UpdateExamResultRequest;
+use App\Models\ExamResult;
 
 class ExamResultController extends Controller
 {
@@ -13,7 +14,8 @@ class ExamResultController extends Controller
      */
     public function index()
     {
-        //
+        $examResults = ExamResult::all();
+        return view('teachers.results.exams.index',compact('examResults'));
     }
 
     /**

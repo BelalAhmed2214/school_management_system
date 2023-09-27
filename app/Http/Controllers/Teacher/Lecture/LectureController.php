@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateLectureRequest;
 use App\Models\Course;
 use App\Models\Lecture;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class LectureController extends Controller
@@ -27,7 +28,8 @@ class LectureController extends Controller
      */
     public function create()
     {
-        $courses = Course::all();
+        $user = Auth::user();
+        $courses = Course::where('user_id',$user->id)->get();
         return view('teachers.lectures.create',compact('courses'));
     }
 

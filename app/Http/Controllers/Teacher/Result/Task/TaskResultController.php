@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teacher\Result\Task;
 
-use App\Models\TaskResult;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTaskResultRequest;
 use App\Http\Requests\UpdateTaskResultRequest;
+use App\Models\TaskResult;
+use App\Models\User;
 
 class TaskResultController extends Controller
 {
@@ -13,7 +15,8 @@ class TaskResultController extends Controller
      */
     public function index()
     {
-        //
+        $taskResults = TaskResult::all();
+        return view('teachers.results.tasks.index',compact('taskResults'));
     }
 
     /**
@@ -21,7 +24,7 @@ class TaskResultController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

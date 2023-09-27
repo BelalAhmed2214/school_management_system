@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Teacher\Task;
+namespace App\Http\Controllers\Teacher\Assignment\Task;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTaskRequest;
@@ -20,7 +20,7 @@ class TaskController extends Controller
         $this->authorize('viewTasks',User::class);
 
         $tasks = Task::all();
-        return view('teachers.tasks.index',compact('tasks'));
+        return view('teachers.assignments.tasks.index',compact('tasks'));
     }
 
     /**
@@ -30,7 +30,7 @@ class TaskController extends Controller
     {
         $user = Auth::user();
         $courses = Course::where('user_id',$user->id)->get();
-        return view('teachers.tasks.create',compact('courses'));
+        return view('teachers.assignments.tasks.create',compact('courses'));
     }
 
     /**
@@ -58,7 +58,8 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        return view('teachers.assignments.tasks.show',compact('task'));
+
     }
 
     /**
@@ -66,7 +67,9 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        $user = Auth::user();
+        $courses = Course::where('user_id',$user->id)->get();
+        return view('teachers.assignments.tasks.edit',compact('courses','task'));
     }
 
     /**
@@ -74,7 +77,17 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        //
+        $task->title = $request->input('title');
+        $task->description = $request->input('description');
+        $task->duration = $request->input('duration');
+        $task->course_id = $request->input('course_id');
+        $task->user_id = Auth::id();
+
+        // Save the new Task to the database
+        $task->save();
+
+        return redirect()->route('teacher.task.index')->with('success', 'Task Updated successfully');
+
     }
 
     /**
@@ -82,6 +95,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+        return redirect()->route('teacher.task.index')->with('success', 'Task Deleted successfully');
+
     }
 }

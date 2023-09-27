@@ -8,11 +8,11 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Student\Course\CourseController as StudentCourseController;
+use App\Http\Controllers\Teacher\Assignment\Exam\ExamController;
+use App\Http\Controllers\Teacher\Assignment\Task\TaskController;
+use App\Http\Controllers\Teacher\Result\Task\TaskResultController;
+use App\Http\Controllers\Teacher\Result\Exam\ExamResultController;
 use App\Http\Controllers\Teacher\Lecture\LectureController;
-use App\Http\Controllers\Teacher\Video\VideoController;
-use App\Http\Controllers\Teacher\Task\TaskController;
-use App\Http\Controllers\Teacher\Exam\ExamController;
-
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -93,6 +93,8 @@ Route::group(['prefix' => 'teacher','as'=>'teacher.'], function () {
         'lecture'=>LectureController::class,
         'exam'=>ExamController::class,
         'task'=>TaskController::class,
+        'examResult'=> ExamResultController::class,
+        'taskResult'=> TaskResultController::class,
     ]);
 });
 ############# End Teacher ##############################
