@@ -28,6 +28,8 @@ class ExamController extends Controller
      */
     public function create()
     {
+        $this->authorize('addExams',User::class);
+
         $user = Auth::user();
         $courses = Course::where('user_id',$user->id)->get();
         return view('teachers.assignments.exams.create',compact('courses'));
@@ -37,6 +39,8 @@ class ExamController extends Controller
      */
     public function store(StoreExamRequest $request)
     {
+        $this->authorize('addExams',User::class);
+
         // Create a new Exam instance and set its attributes
         $exam = new Exam();
         $exam->title = $request->input('title');
@@ -65,6 +69,8 @@ class ExamController extends Controller
      */
     public function edit(Exam $exam)
     {
+        $this->authorize('editExams',User::class);
+
         $user = Auth::user();
         $courses = Course::where('user_id',$user->id)->get();
         return view('teachers.assignments.exams.edit',compact('courses','exam'));
@@ -75,6 +81,8 @@ class ExamController extends Controller
      */
     public function update(UpdateExamRequest $request, Exam $exam)
     {
+        $this->authorize('editExams',User::class);
+
         $exam->title = $request->input('title');
         $exam->description = $request->input('description');
         $exam->duration = $request->input('duration');
@@ -93,6 +101,7 @@ class ExamController extends Controller
      */
     public function destroy(Exam $exam)
     {
+        $this->authorize('deleteExams',User::class);
         $exam->delete();
         return redirect()->route('teacher.exam.index')->with('success', 'Exam Deleted successfully');
     }

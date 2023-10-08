@@ -46,17 +46,6 @@
                         </a>
                     </li>
                     @endcan
-                    @can('registerCourse',App\Models\User::class)
-
-                    <li>
-                        <a href="{{route('student.courses.create')}}" class="waves-effect">
-                            <i class="mdi mdi-account-group"></i>
-                            <span>Courses</span>
-                        </a>
-                    </li>
-                    @endcan
-
-
                     @can('viewLectures',\App\Models\User::class)
                             <li>
                                 <a href="{{route('teacher.lecture.index')}}" class="waves-effect">
@@ -96,28 +85,38 @@
 
                     @can('viewResults',\App\Models\User::class)
 
-                    <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-buffer"></i>
-                        <span>Results</span>
-                    </a>
-                    <ul>
                         <li>
-                            <a href="{{route('teacher.examResult.index')}}" class="waves-effect">
-                                <i class="mdi mdi-account-group"></i>
-                                <span>Exams</span>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="mdi mdi-buffer"></i>
+                                <span>Results</span>
                             </a>
-                        </li>
-                        <li>
-                            <a href="{{route('teacher.taskResult.index')}}" class="waves-effect">
-                                <i class="mdi mdi-account-group"></i>
-                                <span>Tasks</span>
-                            </a>
-                        </li>
+                            <ul>
+                                <li>
+                                    <a href="{{route('teacher.examResult.index')}}" class="waves-effect">
+                                        <i class="mdi mdi-account-group"></i>
+                                        <span>Exams</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('teacher.taskResult.index')}}" class="waves-effect">
+                                        <i class="mdi mdi-account-group"></i>
+                                        <span>Tasks</span>
+                                    </a>
+                                </li>
 
-                    </ul>
-                </li>
+                            </ul>
+                        </li>
                     @endcan
+
+                    @can('viewEnrolledCourses',App\Models\User::class)
+                        <li>
+                            <a href="{{route('student.course.index')}}" class="waves-effect">
+                                <i class="mdi mdi-account-group"></i>
+                                <span>Courses</span>
+                            </a>
+                        </li>
+                    @endcan
+
                 @endif
             </ul>
         </div>

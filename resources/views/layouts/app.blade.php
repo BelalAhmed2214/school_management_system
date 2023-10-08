@@ -24,6 +24,10 @@
 	<!-- App Css-->
 		<link href="{{ asset("assets/css/app-rtl.min.css") }}" id="app-style" rel="stylesheet" type="text/css"/>
 		<link href="{{ asset("assets/css/app.min.css") }}" id="app-style" rel="stylesheet" type="text/css"/>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
 </head>
 <body data-sidebar="dark">
 <!-- Begin page -->

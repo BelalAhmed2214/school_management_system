@@ -28,6 +28,8 @@ class LectureController extends Controller
      */
     public function create()
     {
+        $this->authorize('addLecture',User::class);
+
         $user = Auth::user();
         $courses = Course::where('user_id',$user->id)->get();
         return view('teachers.lectures.create',compact('courses'));
@@ -38,6 +40,8 @@ class LectureController extends Controller
      */
     public function store(StoreLectureRequest $request)
     {
+        $this->authorize('addLecture',User::class);
+
         // Handle file upload if needed
         if ($request->hasFile('doc')) {
             $file = $request->file('doc');
@@ -65,6 +69,7 @@ class LectureController extends Controller
      */
     public function show(Lecture $lecture)
     {
+
         return view('teachers.lectures.show',compact('lecture'));
     }
 
@@ -73,6 +78,7 @@ class LectureController extends Controller
      */
     public function edit(Lecture $lecture)
     {
+        $this->authorize('editLecture',[User::class,$lecture]);
         $courses = Course::all();
         return view('teachers.lectures.edit',compact('lecture','courses'));
     }
@@ -82,6 +88,7 @@ class LectureController extends Controller
      */
     public function update(UpdateLectureRequest $request, Lecture $lecture)
     {
+        $this->authorize('editLecture',[User::class,$lecture]);
         // Update the lecture fields
         $lecture->title = $request->input('title');
         $lecture->content = $request->input('content');
@@ -119,6 +126,8 @@ class LectureController extends Controller
      */
     public function destroy(Lecture $lecture)
     {
+        $this->authorize('deleteLecture',[User::class,$lecture]);
+
         // Get the file path of the lecture's document
         $filePath = public_path('documents/' . $lecture->doc);
 

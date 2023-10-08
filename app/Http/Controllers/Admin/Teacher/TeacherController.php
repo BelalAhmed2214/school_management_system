@@ -51,13 +51,13 @@ class TeacherController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $teacher)
     {
         /*
 
-         TODO:Implement Address and phoneNumber(multivalued) for Teacher and The courses
-            that the Teacher teached it.
-         */
+        TODO:Implement Address and phoneNumber(multivalued) for Teacher and The courses
+            that the Teacher teached it and Exams & Tasks he published
+        */
 
     }
 

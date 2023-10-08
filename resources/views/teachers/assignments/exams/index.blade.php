@@ -4,9 +4,11 @@
 
 @section('content')
     <div class="container">
+        @can('addExams',\App\Models\User::class)
         <div>
             <a href="{{route('teacher.exam.create')}}" class="btn btn-success">Add Exam</a>
         </div>
+        @endcan
         <br>
         <div class="card-header">
             <h4>All Exams</h4>

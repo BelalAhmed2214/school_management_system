@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{route('student.courses.store')}}">
+        <form method="POST" action="{{route('student.course.store')}}">
             @csrf
 
             <div class="form-group">
@@ -42,5 +42,6 @@
     </div>
 
 @endsection
+
 
 

@@ -30,19 +30,19 @@
                     <label for="created_at">Created At:</label>
                     <p>{{ $task->created_at }}</p>
                 </div>
-                <div class="form-group">
-                @can('editTasks',\App\Models\User::class)
-                    <a href="{{ route('teacher.task.edit', $task) }}" class="btn btn-primary mr-1">Edit task</a>
-                @endcan
-                @can('deleteTasks',\App\Models\User::class)
+{{--                <div class="form-group">--}}
+{{--                    @can('edittasks',\App\Models\User::class)--}}
+{{--                    <a href="{{ route('teacher.task.edit', $task) }}" class="btn btn-primary mr-1">Edit task</a>--}}
+{{--                    @endcan--}}
+{{--                    @can('deletetasks',\App\Models\User::class)--}}
+{{--                    <form action="{{ route('teacher.task.destroy', $task) }}" method="POST" style="display: inline;"  onsubmit="return confirm('Are you sure you want to delete this task?');">--}}
+{{--                        @csrf--}}
+{{--                        @method('DELETE')--}}
+{{--                        <button type="submit" class="btn btn-danger">Delete task</button>--}}
+{{--                    </form>--}}
+{{--                    @endcan--}}
+{{--                </div>--}}
 
-                    <form action="{{ route('teacher.task.destroy', $task) }}" method="POST" style="display: inline;"  onsubmit="return confirm('Are you sure you want to delete this exam?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete task</button>
-                    </form>
-                @endcan
-                </div>
             </div>
         </div>
     </div>

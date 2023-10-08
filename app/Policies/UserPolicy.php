@@ -3,7 +3,8 @@
 namespace App\Policies;
 
 use App\Models\User;
-
+use App\Models\Lecture;
+use Illuminate\Support\Facades\Auth;
 class UserPolicy
 {
     ////////////// Start Admin ////////////////////////
@@ -78,20 +79,71 @@ class UserPolicy
     {
         return $user->role->name === 'Student';
     }
+    public function viewPublishedExams(User $user)
+    {
+        return $user->role->name === 'Student';
+    }
     ///////////// End Student ////////////////////
     //////////// Start Teacher ///////////////////
     public function viewExams(User $user)
     {
-        return $user->role->name === 'Teacher' || $user->role->name === 'Admin';
+        return $user->role->name === 'Teacher' || $user->role->name === 'Student' ;
+    }
+    public function viewStudentExams(User $user)
+    {
+        return $user->role->name === 'Student';
+    }
+    public function viewStudentTasks(User $user)
+    {
+        return $user->role->name === 'Student';
+    }
+    public function addExams(User $user)
+    {
+        return $user->role->name === 'Teacher';
+    }
+    public function editExams(User $user)
+    {
+        return $user->role->name === 'Teacher';
+    }
+    public function deleteExams(User $user)
+    {
+        return $user->role->name === 'Teacher';
     }
     public function viewTasks(User $user)
     {
-        return $user->role->name === 'Teacher' || $user->role->name === 'Admin';
+        return $user->role->name === 'Teacher' || $user->role->name === 'Admin' || $user->role->name === 'Student';
+    }
+    public function addTasks(User $user)
+    {
+        return $user->role->name === 'Teacher';
+    }
+    public function editTasks(User $user)
+    {
+        return $user->role->name === 'Teacher';
+    }
+    public function deleteTasks(User $user)
+    {
+        return $user->role->name === 'Teacher';
     }
     public function viewLectures(User $user)
     {
         return $user->role->name === 'Teacher';
     }
+    public function addLecture(User $user)
+    {
+        return $user->role->name === 'Teacher';
+    }
+    public function editLecture(User $user,Lecture $lecture)
+    {
+        return $user->role->name === 'Teacher' && $user->id === $lecture->user_id;
+    }
+
+    public function deleteLecture(User $user, Lecture $lecture)
+    {
+        return $user->role->name === 'Teacher' && $user->id === $lecture->user_id;
+    }
+
+
     public function viewAssignment(User $user)
     {
         return $user->role->name === 'Teacher';

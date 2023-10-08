@@ -1,18 +1,21 @@
 <?php
 
 use App\Http\Controllers\Admin\Course\CourseController as AdminCourseController;
+use App\Http\Controllers\Student\Course\CourseController as StudentCourseController;
 use App\Http\Controllers\Admin\Student\StudentController;
 use App\Http\Controllers\Admin\Teacher\TeacherController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Student\Course\CourseController as StudentCourseController;
-use App\Http\Controllers\Teacher\Assignment\Exam\ExamController;
+use App\Http\Controllers\Teacher\Assignment\Exam\ExamController as TeacherExamController;
+use App\Http\Controllers\Student\Exam\ExamController as StudentExamController;
 use App\Http\Controllers\Teacher\Assignment\Task\TaskController;
+use App\Http\Controllers\Student\Task\TaskController as StudentTaskController;
 use App\Http\Controllers\Teacher\Result\Task\TaskResultController;
 use App\Http\Controllers\Teacher\Result\Exam\ExamResultController;
-use App\Http\Controllers\Teacher\Lecture\LectureController;
+use App\Http\Controllers\Teacher\Lecture\LectureController as TeacherLectureController;
+use App\Http\Controllers\Student\Lecture\LectureController as StudentLectureController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -80,18 +83,22 @@ Route::group(['prefix' => 'admin' ,'as'=>'admin.'], function () {
 ############### End Admin ##############################
 
 ############## Start Student ###########################
-Route::group(['prefix' => 'student', 'namespace' => 'Student' ,'as'=>'student.'], function () {
-    Route::get('courses', [StudentCourseController::class,'index'])->name('courses.index');
-    Route::get('courses/register', [StudentCourseController::class,'create'])->name('courses.create');
-    Route::post('courses',[StudentCourseController::class,'store'])->name('courses.store');
+Route::group(['prefix' => 'student','as'=>'student.'], function () {
+
+    Route::resources([
+        'course'=>StudentCourseController::class,
+        'exam'=>StudentExamController::class,
+        'lecture'=>StudentLectureController::class,
+        'task'=>StudentTaskController::class,
+    ]);
 
 });
 ############## End Student #############################
 ############# Start Teacher #############################
 Route::group(['prefix' => 'teacher','as'=>'teacher.'], function () {
     Route::resources([
-        'lecture'=>LectureController::class,
-        'exam'=>ExamController::class,
+        'lecture'=>TeacherLectureController::class,
+        'exam'=>TeacherExamController::class,
         'task'=>TaskController::class,
         'examResult'=> ExamResultController::class,
         'taskResult'=> TaskResultController::class,

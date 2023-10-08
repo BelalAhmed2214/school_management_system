@@ -3,9 +3,17 @@
 @section('title', 'Course List')
 
 @section('content')
-
-
     <div class="container">
+        @can('registerCourse', \App\Models\User::class)
+            <div>
+                <a href="{{ route('student.course.create') }}" class="btn btn-success">Submit Course</a>
+            </div>
+        @endcan
+        <br>
+        <div class="card-header">
+            <span><h5>Enrolled Courses</h5></span>
+        </div>
+        <br>
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -22,8 +30,6 @@
                 </button>
             </div>
         @endif
-        <div class="card-header">{{ __('Enrolled Courses') }}</div>
-
         @if (count($courses) > 0)
             <table class="table">
                 <thead>
@@ -36,30 +42,22 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <?php $i=0 ?>
-
+                    <?php $i = 0 ?>
                 @foreach ($courses as $course)
                         <?php $i++ ?>
-
                     <tr>
                         <td>{{ $i }}</td>
                         <td>{{ $course->name }}</td>
-
                         <td>
-                            @foreach($course->users as $user)
+                            @foreach ($course->users as $user)
                                 @if ($user->role_id === 2)
                                     {{ $user->name }}
-                                    @if (!$loop->last)
-                                        <br> <!-- Add a line break if it's not the last instructor -->
-                                    @endif
                                 @endif
                             @endforeach
                         </td>
-
                         <td>{{ $course->created_at }}</td>
                         <td>
-                            <!-- Add your actions here, like view, edit, delete buttons -->
-                            <a href="#" class="btn btn-info">View</a>
+                            <a href="{{ route('student.course.show',$course->id)}}" class="btn btn-primary">View</a>
 
                         </td>
                     </tr>

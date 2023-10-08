@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Teacher\Result\Exam;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExamResultRequest;
 use App\Http\Requests\UpdateExamResultRequest;
+use App\Models\Course;
+use App\Models\Exam;
+use App\Models\User;
 use App\Models\ExamResult;
+use Illuminate\Support\Facades\Auth;
 
 class ExamResultController extends Controller
 {
@@ -23,7 +27,10 @@ class ExamResultController extends Controller
      */
     public function create()
     {
-        //
+        $teacher = Auth::user();
+        $exams = Exam::where('user_id',$teacher->id)->get();
+        $students = User::where('role_id',3)->get();
+        return view('teachers.results.exams.create',compact('exams','students'));
     }
 
     /**

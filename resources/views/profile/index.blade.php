@@ -25,9 +25,7 @@
 
                             <!-- Add an edit button to allow the user to update their profile -->
                             <a href="{{route('profile.edit')}}" class="btn btn-primary">Edit Profile</a>
-                        @if ($user->role->name === 'Student')
-                            <a href="{{route('student.courses.index')}}" class="btn btn-primary">View Enrolled courses</a>
-                        @endif
+
                     </div>
                 </div>
             </div>

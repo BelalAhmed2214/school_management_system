@@ -1,17 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'All Tasks')
+@section('title', 'All Exams')
 
 @section('content')
     <div class="container">
-        @can('addTasks',\App\Models\User::class)
-        <div>
-            <a href="{{route('teacher.task.create')}}" class="btn btn-success">Add Task</a>
-        </div>
-        @endcan
-        <br>
+
         <div class="card-header">
-            <h4>All tasks</h4>
+            <h4>All Exams</h4>
         </div>
         <br>
 
@@ -38,19 +33,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php $i=0 ?>
+                        <?php $i=0 ?>
 
-                    @foreach ($tasks as $task)
+                    @foreach ($exams as $exam)
                             <?php $i++ ?>
 
                         <tr>
                             <td>{{ $i }}</td>
-                            <td>{{ $task->title }}</td>
-                            <td>{{ $task->duration }}</td>
-                            <td>{{ $task->course->name }}</td>
-                            <td>{{ $task->user->name }}</td>
+                            <td>{{ $exam->title }}</td>
+                            <td>{{ $exam->duration }}</td>
+                            <td>{{ $exam->course->name }}</td>
+                            <td>{{ $exam->user->name }}</td>
                             <td>
-                                <a href="{{ route('teacher.task.show', $task) }}" class="btn btn-info">View</a>
+                                <a href="{{ route('teacher.exam.show', $exam) }}" class="btn btn-info">View</a>
 
                             </td>
                         </tr>

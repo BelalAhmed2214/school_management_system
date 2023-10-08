@@ -48,7 +48,7 @@
                                             <!-- Add action buttons or links here -->
                                             <a href="#" class="btn btn-secondary">View</a>
                                             <a href="{{route('admin.teacher.edit',$teacher->id)}}" class="btn btn-primary">Edit</a>
-                                            <form action="{{ route('admin.teacher.destroy', $teacher->id) }}" method="POST" style="display: inline;">
+                                            <form action="{{ route('admin.teacher.destroy', $teacher->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this exam?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">Delete</button>

@@ -28,6 +28,7 @@ class TaskController extends Controller
      */
     public function create()
     {
+        $this->authorize('addTasks',User::class);
         $user = Auth::user();
         $courses = Course::where('user_id',$user->id)->get();
         return view('teachers.assignments.tasks.create',compact('courses'));
@@ -38,6 +39,8 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
+        $this->authorize('addTasks',User::class);
+
         // Create a new task instance and set its attributes
         $task = new task();
         $task->title = $request->input('title');
@@ -67,6 +70,8 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
+        $this->authorize('editTasks',User::class);
+
         $user = Auth::user();
         $courses = Course::where('user_id',$user->id)->get();
         return view('teachers.assignments.tasks.edit',compact('courses','task'));
@@ -77,6 +82,8 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
+        $this->authorize('editTasks',User::class);
+
         $task->title = $request->input('title');
         $task->description = $request->input('description');
         $task->duration = $request->input('duration');
@@ -95,6 +102,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
+        $this->authorize('deleteTasks',User::class);
+
         $task->delete();
         return redirect()->route('teacher.task.index')->with('success', 'Task Deleted successfully');
 

@@ -1,15 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'All Tasks')
+@section('title', 'All tasks')
 
 @section('content')
     <div class="container">
-        @can('addTasks',\App\Models\User::class)
-        <div>
-            <a href="{{route('teacher.task.create')}}" class="btn btn-success">Add Task</a>
-        </div>
-        @endcan
-        <br>
+
         <div class="card-header">
             <h4>All tasks</h4>
         </div>
@@ -38,7 +33,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php $i=0 ?>
+                        <?php $i=0 ?>
 
                     @foreach ($tasks as $task)
                             <?php $i++ ?>

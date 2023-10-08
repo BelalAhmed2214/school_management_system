@@ -4,20 +4,6 @@
 
 @section('content')
     <div class="container">
-        @can('addLecture',\App\Models\User::class)
-        <div>
-            <a href="{{ route('teacher.lecture.create') }}" class="btn btn-success">Add Lecture</a>
-        </div>
-        @endcan
-        <br>
-        @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
         <div class="card-header">
             <h4>All Lectures</h4>
         </div>
@@ -25,7 +11,7 @@
 
 
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <table class="table table-bordered">
                     <thead>
                     <tr>

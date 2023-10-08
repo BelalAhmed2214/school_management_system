@@ -61,7 +61,7 @@ class CourseController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $lecture = Course::with('lectures')->where('');
     }
 
     /**
@@ -83,7 +83,12 @@ class CourseController extends Controller
 
         $course->name = $request->input('name');
         $course->user_id = $request->input('user_id');
+        // Save the course to the database
         $course->save();
+
+        // Attach the selected instructor(s) to the course
+        $instructorId = $request->input('user_id');
+        $course->users()->attach($instructorId);
 
         return redirect()->route('admin.course.index')->with('success', 'Course successfully updated');
 

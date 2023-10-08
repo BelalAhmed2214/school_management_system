@@ -16,20 +16,22 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Degree</th>
-                    <th>Exam ID</th>
+                    <th>#</th>
+                    <th>Exam</th>
                     <th>Student</th>
+                    <th>Degree</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
+                <?php $i=0 ?>
                 @foreach ($examResults as $result)
+                        <?php $i++ ?>
                     <tr>
-                        <td>{{$result->id}}</td>
+                        <td>{{$i}}</td>
+                        <td>{{$result->exam->name}}</td>
+                        <td>{{$result->user->name}}</td>
                         <td>{{$result->degree}}</td>
-                        <td>{{$result->exam_id}}</td>
-                        <td>{{$result->user_id}}</td>
                         <td>
                             {{-- Add actions like edit and delete buttons --}}
                             <a href="{{ route('teacher.examResult.edit', $result->id) }}" class="btn btn-primary">Edit</a>

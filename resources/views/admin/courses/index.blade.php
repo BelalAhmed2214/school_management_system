@@ -53,6 +53,7 @@
 
                         <td>{{ $course->created_at }}</td>
                         <td>
+                            <a href="{{route('admin.course.show',$course)}}" class="btn btn-secondary">View</a>
                             <!-- Add your actions here, like view, edit, delete buttons -->
                             <a href="{{route('admin.course.edit',$course)}}" class="btn btn-primary">Edit</a>
                             <form action="{{route('admin.course.destroy',$course)}}" method="POST" style="display: inline;">
